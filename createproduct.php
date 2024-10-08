@@ -1,14 +1,11 @@
 <?php
-// Check if form was submitted
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($_POST) > 0) {
-    // Read the JSON file
-    $filePath = 'Data/products.json'; // Path to your JSON file
+    $filePath = 'Data/products.json'; 
     $content = file_get_contents($filePath);
     
-    // Convert the string into a PHP array
     $products = json_decode($content, true);
     
-    // Add new product to the array
     $newProduct = [
         'name' => $_POST['product_name'],
         'price' => $_POST['product_price'],
@@ -17,17 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($_POST) > 0) {
     ];
     $products[] = $newProduct;
     
-    // Encode the array back into JSON
     $jsonContent = json_encode($products, JSON_PRETTY_PRINT);
     
-    // Save the updated JSON content back to the file
     file_put_contents($filePath, $jsonContent);
     
-    // Redirect to the index page after submission
     header('Location: index.php');
     exit;
 } else {
-    // Display the form if no POST data has been submitted
 	
     ?>
 		<br>
