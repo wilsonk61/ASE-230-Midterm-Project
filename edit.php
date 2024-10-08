@@ -1,22 +1,17 @@
 <?php
-// Path to your JSON file
 $filePath = 'Data/products.json';
 
-// Read the file
 $content = file_get_contents($filePath);
 
-// Convert the JSON string into a PHP array
 $products = json_decode($content, true);
 
-// Get the element with the index from the query string
 if (isset($_GET['index'])) {
     $index = $_GET['index'];
     $product = $products[$index];
 }
 
-// Check if the form was submitted to update the product
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Update the product details
+
     $product = [
         'name' => $_POST['name'],
         'price' => $_POST['price'],
@@ -24,16 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'description' => $_POST['description']
     ];
 
-    // Save the updated product back to the array
     $products[$_GET['index']] = $product;
 
-    // Encode the array back into JSON
     $jsonContent = json_encode($products, JSON_PRETTY_PRINT);
 
-    // Save the updated JSON content back to the file
     file_put_contents($filePath, $jsonContent);
 
-    // Redirect back to the index page after saving
     header('Location: index.php');
     exit;
 }
@@ -47,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product</title>
     <style>
-        /* Add some basic styling */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
