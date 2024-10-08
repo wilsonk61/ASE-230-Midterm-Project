@@ -1,13 +1,10 @@
 <?php
-    // Get the product name from the URL
     if (isset($_GET['name'])) {
         $productName = urldecode($_GET['name']);
 
-        // Load products from JSON file
         $json = file_get_contents('Data/Products.json');
         $products = json_decode($json, true);
 
-        // Find the product with the matching name
         $product = null;
         foreach ($products as $p) {
             if ($p['name'] == $productName) {
@@ -84,7 +81,7 @@
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
         </footer>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https:cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts2.js"></script>
     </body>
