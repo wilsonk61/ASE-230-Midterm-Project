@@ -46,11 +46,9 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					<?php
-						// Load products from JSON file
 						$json = file_get_contents('Data/Products.json');
 						$products = json_decode($json, true);
 
-						// Loop through products
 						foreach ($products as $index => $product) {
 					?>
 						<div class="col mb-5">
