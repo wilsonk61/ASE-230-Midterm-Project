@@ -1,11 +1,11 @@
 <?php
-require_once('functions.php');
-
-if(!isset($_SESSION['email'])) {
-    die("Access denied; Sign in");
+require_once(__DIR__ . '/../functions.php');
+$allowedSessionID = 1;
+if (!isset($_SESSION['email']) || $_SESSION['ID'] != $allowedSessionID) {
+	die("Access Denied");
 }
 
-$filePath = 'Data/Products.json';
+$filePath = __DIR__.'/../Data/Products.json';
 
 $content = file_get_contents($filePath);
 
@@ -15,10 +15,6 @@ $index = $_GET['index'];
 
 $product = $products[$index];
 
-if ($product['id'] != $_SESSION['ID']) {
-    die("Access Denied: You cannot delete this product.");
-}
-
 unset($products[$index]);
 
 $products = array_values($products);
@@ -27,5 +23,5 @@ $jsonContent = json_encode($products, JSON_PRETTY_PRINT);
 
 file_put_contents($filePath, $jsonContent);
 
-header('Location: index.php');
+header('Location: adminview.php');
 exit;

@@ -1,15 +1,15 @@
 <?php
-require_once('functions.php');
-
-if(isset($_SESSION['email'])) {
-	$email = $_SESSION['email'];
-	$id = $_SESSION['ID'];
-} else {
-    die("Access denied; Sign in");
+require_once(__DIR__ . '/../functions.php');
+$allowedSessionID = 1; 
+if (!isset($_SESSION['email']) || $_SESSION['ID'] != $allowedSessionID) {
+	die("Access Denied");
 }
 
+$email = $_SESSION['email'];
+$id = $_SESSION['ID'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($_POST) > 0) {
-    $filePath = 'Data/Products.json'; 
+    $filePath = __DIR__.'/../Data/Products.json';
     $content = file_get_contents($filePath);
     
     $products = json_decode($content, true);
@@ -58,4 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($_POST) > 0) {
 			<button type="submit" style="width: 100%; padding: 10px; background-color: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">Add Product</button>
 		</form>
 
-<?php } ?>
+    <?php
+}
+?>
