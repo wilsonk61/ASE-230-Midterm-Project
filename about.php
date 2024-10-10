@@ -26,7 +26,7 @@ if(!isset($_SESSION['email'])) {
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="createproduct.php">Make Your Own Product</a></li>
                 </ul>
                 <form class="d-flex">
-					<a href="auth/signout.php" class="btn btn-outline-dark">Sign Out</a>
+			<a href="auth/signout.php" class="btn btn-outline-dark">Sign Out</a>
                 </form>
             </div>
         </div>
