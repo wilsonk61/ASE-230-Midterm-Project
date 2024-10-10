@@ -1,7 +1,7 @@
 <?php 
 require_once('functions.php');
 if(!isset($_SESSION['email'])) {
-    	die("Access denied; Sign in");
+    header('Location: auth/signin.php');
 }
 ?>
 <!DOCTYPE html>
