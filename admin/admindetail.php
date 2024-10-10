@@ -1,14 +1,14 @@
 <?php
-require_once('functions.php');
-
-if(!isset($_SESSION['email'])) {
-    	die("Access denied; Sign in");
+require_once(__DIR__ . '/../functions.php');
+$allowedSessionID = 1;
+if (!isset($_SESSION['email']) || $_SESSION['ID'] != $allowedSessionID) {
+	die("Access Denied");
 }
 
 if (isset($_GET['name'])) {
     $productName = urldecode($_GET['name']);
 
-    $json = file_get_contents('Data/Products.json');
+    $json = file_get_contents('../Data/Products.json');
     $products = json_decode($json, true);
 
     $product = null;
@@ -20,7 +20,6 @@ if (isset($_GET['name'])) {
     }
 } 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34,13 +33,13 @@ if (isset($_GET['name'])) {
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles2.css" rel="stylesheet" />
+        <link href="../css/styles2.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
+    <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="profile.php">Profile</a>
+                <a class="navbar-brand" href="#!">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -51,8 +50,8 @@ if (isset($_GET['name'])) {
                 </div>
             </div>
         </nav>
-        <br>
-        <div style="text-align: center; margin-bottom: 20px;">
+    	<br>
+    	<div style="text-align: center; margin-bottom: 20px;">
 			<a href="index.php" style="padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 5px;">Go Back</a>
 		</div>
         <!-- Product section-->
@@ -71,7 +70,7 @@ if (isset($_GET['name'])) {
 							<?php if (isset($product['original_price'])) { ?>
 								<span class="text-decoration-line-through"><?php echo $product['original_price']; ?></span>
 							<?php } ?>
-							<span><?php echo $product['price']; ?></span>
+							<span><?php echo "$", $product['price']; ?></span>
 						</div>
 						<p class="lead"><?php echo isset($product['description']) ? $product['description'] : 'No description available.'; ?></p>
 						<div class="d-flex">

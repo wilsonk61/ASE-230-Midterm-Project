@@ -1,3 +1,9 @@
+<?php 
+require_once('functions.php');
+if(!isset($_SESSION['email'])) {
+    	die("Access denied; Sign in");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,17 +23,16 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="profile.php">Profile</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.php">About Us</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="createproduct.php">Make Your Own Product</a></li>
                     </ul>
                     <form class="d-flex">
-						<a href="createproduct.php" class="btn btn-outline-dark">
-							Sign In
-						</a>
+						<a href="auth/signout.php" class="btn btn-outline-dark">Sign Out</a>
                     </form>
                 </div>
             </div>
@@ -61,7 +66,7 @@
 										<!-- Product name-->
 										<h5 class="fw-bolder"><?php echo $product['name']; ?></h5>
 										<!-- Product price-->
-										<?php echo $product['price']; ?>
+										<?php echo "$", $product['price']; ?>
 									</div>
 								</div>
 								<!-- Product actions-->

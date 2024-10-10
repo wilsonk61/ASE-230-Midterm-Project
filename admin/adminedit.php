@@ -1,23 +1,19 @@
 <?php
-require_once('functions.php');
-
-if(!isset($_SESSION['email'])) {
-    	die("Access denied; Sign in");
+require_once(__DIR__ . '/../functions.php');
+$allowedSessionID = 1; 
+if (!isset($_SESSION['email']) || $_SESSION['ID'] != $allowedSessionID) {
+	die("Access Denied");
 }
 
-$filePath = 'Data/products.json';
+$filePath = __DIR__.'/../Data/Products.json';
 
 $content = file_get_contents($filePath);
 
 $products = json_decode($content, true);
 
-if (isset($_GET['index'])) {
+if (isset($_GET['index']) && isset($products[$_GET['index']])) {
     $index = $_GET['index'];
     $product = $products[$index];
-}
-
-if ($product['id'] != $_SESSION['ID']) {
-        die("Access Denied: You cannot edit this product.");
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     file_put_contents($filePath, $jsonContent);
 
-    header('Location: index.php');
+    header('Location: adminview.php');
     exit;
 }
 ?>
@@ -82,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 	<br>
 	<div style="text-align: center; margin-bottom: 20px;">
-		<a href="index.php" style="padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 5px;">Go Back</a>
+		<a href="adminview.php" style="padding: 10px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 5px;">Go Back</a>
 	</div>
 </head>
 <body>
