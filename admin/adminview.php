@@ -31,7 +31,7 @@ $contacts = json_decode(file_get_contents($contactFilePath), true);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="adminabout.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="admincreateproduct.php">Make Your Own Product</a></li>
                 	<li class="nav-item"><a class="nav-link active" aria-current="page" href="adminview.php">Admin Product Management Dashboard</a></li>
                 </ul>
